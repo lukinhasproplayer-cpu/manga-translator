@@ -1,0 +1,7 @@
+streamlit
+numpy
+pillow
+opencv-python-headless
+paddleocr
+paddlepaddle
+googletrans==4.0.0-rc1
