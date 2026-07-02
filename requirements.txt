@@ -1,7 +1,5 @@
-streamlit
+streamlit==1.32.0
 numpy
 pillow
 opencv-python-headless
-paddleocr
-paddlepaddle
 googletrans==4.0.0-rc1
