@@ -1,6 +1,9 @@
-astreamlit
-easyocr
-pillow
+streamlit
 numpy
+pillow
+opencv-python-headless
+torch
+torchvision
+easyocr
 streamlit-drawable-canvas
 deep-translator
