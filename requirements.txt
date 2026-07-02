@@ -1,5 +1,6 @@
 streamlit
-numpy
-pillow
-opencv-python-headless
 easyocr
+pillow
+numpy
+googletrans==4.0.0-rc1
+streamlit-drawable-canvas
