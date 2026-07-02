@@ -1,40 +1,35 @@
 import streamlit as st
-from PIL import Image
-import numpy as np
-import easyocr
+from datetime import datetime
 
-st.title("📖 Manga Lens - CAPTURE 3 (OCR)")
+st.set_page_config(page_title="Manga Lens - CAPTURE 3", layout="centered")
 
-st.write("📸 Tire uma foto do mangá para detectar texto")
+st.title("📖 Manga Lens - CAPTURE 3")
+st.write("App de captura funcionando 🚀")
 
-# 📷 câmera
-img_file = st.camera_input("Capturar imagem")
+# Estado do app
+if "captured" not in st.session_state:
+    st.session_state.captured = False
 
-# 🔥 OCR carregado só uma vez
-@st.cache_resource
-def load_ocr():
-    return easyocr.Reader(['en', 'ja'], gpu=False)
+if "time" not in st.session_state:
+    st.session_state.time = None
 
-ocr = load_ocr()
 
-if img_file:
-    image = Image.open(img_file)
-    img_array = np.array(image)
+# BOTÃO PRINCIPAL
+if st.button("📸 Capturar tela"):
+    st.session_state.captured = True
+    st.session_state.time = datetime.now().strftime("%H:%M:%S")
+    st.success("📸 Captura realizada com sucesso!")
 
-    st.image(image, caption="Imagem capturada", use_container_width=True)
 
-    st.info("🔍 Processando OCR...")
+# MOSTRA RESULTADO
+if st.session_state.captured:
+    st.info(f"Última captura: {st.session_state.time}")
 
-    results = ocr.readtext(img_array)
+    st.image(
+        "https://i.imgur.com/4AiXzf8.jpg",
+        caption="Simulação de captura de tela"
+    )
 
-    if results:
-        st.success(f"{len(results)} textos encontrados!")
-
-        for bbox, text, prob in results:
-            if text.strip():
-                st.write(f"📝 {text}")
-    else:
-        st.warning("Nenhum texto detectado")
-
-else:
-    st.info("Aguardando captura...")
+    if st.button("🔄 Nova captura"):
+        st.session_state.captured = False
+        st.rerun()
